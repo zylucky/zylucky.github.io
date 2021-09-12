@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="张渊">
+    
+    <title>
+        
+            vue spa应用seo优化方案（预渲染） |
+        
+        执笔写下信念
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/uploads/avatar.jpg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/uploads/avatar.jpg","favicon":"/uploads/avatar.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"道阻且长，行则将至，行而不辍，未来可期。"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/uploads/avatar.jpg">
+                </a>
+            
+            <a class="logo-title" href="/">
+                执笔写下信念
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">vue spa应用seo优化方案（预渲染）</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/uploads/avatar.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">张渊</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-09-12 20:26:24
+    </span>
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>预渲染能与服务端渲染一样提高 SEO 优化，但前者比后者需要更少的配置，实现成本低。弱网环境下，预渲染能更快地呈现页面内容，减少页面可见时间。本篇文章主要介绍了本人实现预渲染的一个过程。<br><br /></p>
+<ul>
+<li><p>从 <code>meta</code> 标签中读取 <code>keywords</code> 、 <code>description</code> 的内容。</p>
+</li>
+<li><p>根据语义化的 <code>html</code> 的标签爬取和分析内容。一个整体都是用 <code>div</code> 标签的网站和正确使用了 <code>html5</code> 标签的效果是不一样的。</p>
+</li>
+<li><p>读取 <code>a</code> 标签里的链接，通过 <code>a</code> 标签的链接可以跳转到别的网站。（爬虫是先跳转，还是继续爬内容再跳转，就看算法是广度优先还是深度优先了）</p>
+</li>
+<li><p>像 <code>h1 - h6</code> 标签是具有不同程度的强调意义的。 一般将 <code>h1</code> 视为重要内容。同样有强调内容还有 <code>strong</code> 、 <code>em</code> 标签。</p>
+<h4 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h4><p><code>vue v2.0</code> + <code>vue-router</code>  + <code>webpack</code> + <code>prerender-spa-plugin</code> + <code>vue-meta-info</code> + <code>vue-cli v2</code> </p>
+<h4 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h4><p>-使用 <code>npm</code> 或 <code>yarn</code> 安装 <code>prerender-spa-plugin</code> 和 <code>vue-meta-info</code> 的过程就不描述了。 </p>
+<p>-在webpack中配置 <code>prerender-spa-plugin</code> </p>
+<p>-配置先弄懂要配置在哪个文件里，配置是否生效。 <code>vue-cli2</code> 的配置文件很多，对这些文件不了解的话，很容易配置错地方。 </p>
+<p>-这个配置只需要在 <code>build</code> 的时候可以生成预渲染好的html，所以应该配置在 <code>build/webpack.prod.conf.js</code> 这个文件里。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在build/webpack.prod.conf.js添加引入</span></span><br><span class="line"><span class="keyword">const</span> PrerenderSpaPlugin = <span class="built_in">require</span>(<span class="string">&#x27;prerender-spa-plugin&#x27;</span>)<span class="comment">//解决seo</span></span><br><span class="line"><span class="keyword">const</span> Renderer = PrerenderSpaPlugin.PuppeteerRenderer<span class="comment">//解决seo</span></span><br><span class="line"><span class="keyword">const</span> webpackConfig = merge(baseWebpackConfig, &#123;</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="comment">// vue-cli生成的配置中就已有这个了，不要动</span></span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            <span class="attr">filename</span>: config.build.index,</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;index.html&#x27;</span>,</span><br><span class="line">            <span class="attr">inject</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">minify</span>: &#123;</span><br><span class="line">                <span class="attr">removeComments</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">collapseWhitespace</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">removeAttributeQuotes</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">chunksSortMode</span>: <span class="string">&#x27;dependency&#x27;</span></span><br><span class="line">        &#125;),</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 在vue-cli生成的文件的基础上，只有下面这个才是我们要配置的</span></span><br><span class="line">        <span class="keyword">new</span> PrerenderSPAPlugin(&#123;</span><br><span class="line">            <span class="comment">// 生成文件的路径，也可以与webpakc打包的一致。</span></span><br><span class="line">            <span class="comment">// 下面这句话非常重要！！！</span></span><br><span class="line">            <span class="comment">// 这个目录只能有一级，如果目录层次大于一级，在生成的时候不会有任何错误提示，在预渲染的时候只会卡着不动。</span></span><br><span class="line">            <span class="attr">staticDir</span>: path.join(__dirname, <span class="string">&#x27;../dist&#x27;</span>),</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 对应自己的路由文件，比如index有参数，就需要写成 /index/param1。</span></span><br><span class="line">            <span class="attr">routes</span>: [<span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;/index&#x27;</span>, <span class="string">&#x27;/about&#x27;</span>, <span class="string">&#x27;/alPay&#x27;</span>, <span class="string">&#x27;/wxPay&#x27;</span>],</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 这个很重要，如果没有配置这段，也不会进行预编译</span></span><br><span class="line">            <span class="attr">renderer</span>: <span class="keyword">new</span> Renderer(&#123;</span><br><span class="line">                <span class="attr">inject</span>: &#123;</span><br><span class="line">                  <span class="attr">foo</span>: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">headless</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="comment">// 在 main.js 中 document.dispatchEvent(new Event(&#x27;render-event&#x27;))，两者的事件名称要对应上。</span></span><br><span class="line">                <span class="attr">renderAfterDocumentEvent</span>: <span class="string">&#x27;render-event&#x27;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//然后在main.js中添加引入</span></span><br><span class="line"><span class="keyword">import</span> MetaInfo <span class="keyword">from</span> <span class="string">&#x27;vue-meta-info&#x27;</span></span><br><span class="line">Vue.use(MetaInfo)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">    router,</span><br><span class="line">    store,</span><br><span class="line">    <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App),</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 这句非常重要，否则预渲染将不会启动 */</span></span><br><span class="line">    mounted () &#123;</span><br><span class="line">        <span class="built_in">document</span>.dispatchEvent(<span class="keyword">new</span> Event(<span class="string">&#x27;render-event&#x27;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>然后运行一下 <code>npm run build</code> 。看一下生成的 <code>dist</code> 的目录里是不是有每个路由名称对应的文件夹。然后找个 <em>目录里</em> 的 <code>index.html</code> 用IDE打开，看文件内容里是否有该文件应该有的内容。有的话，这步就成功了 </p>
+<h4 id="在vue中使用-vue-meta-info"><a href="#在vue中使用-vue-meta-info" class="headerlink" title="在vue中使用 vue-meta-info"></a>在vue中使用 <code>vue-meta-info</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">		首页</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">    metaInfo: &#123;</span><br><span class="line">        title: &#x27;我是一个title&#x27;,</span><br><span class="line">        meta: [</span><br><span class="line">            &#123;</span><br><span class="line">                name: &#x27;keywords&#x27;,</span><br><span class="line">                content: &#x27;关键字1,关键字2,关键字3&#x27;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                name: &#x27;description&#x27;,</span><br><span class="line">                content: &#x27;这是一段网页的描述&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="下面是特别需要注意的事项（否则将会出现问题）"><a href="#下面是特别需要注意的事项（否则将会出现问题）" class="headerlink" title="下面是特别需要注意的事项（否则将会出现问题）"></a>下面是特别需要注意的事项（否则将会出现问题）</h4><ul>
+<li><p>这里使用的 <code>prerender-spa-plugin</code> 的版本是 <code>3.2.1</code> ，在 <code>2.x</code> 的版本中有个写法如下 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> PrerenderSpaPlugin = <span class="built_in">require</span>(<span class="string">&#x27;prerender-spa-plugin&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> webpackConfig = merge(baseWebpackConfig, &#123;</span><br><span class="line">    <span class="attr">plugins</span>: &#123;</span><br><span class="line">        <span class="comment">//配置 prerender-spa-plugin</span></span><br><span class="line">        <span class="keyword">new</span> PrerenderSpaPlugin(</span><br><span class="line">            <span class="comment">// 生成文件的路径，此处与webpack打包地址一致</span></span><br><span class="line">            path.join(config.build.assetsRoot), <span class="comment">//config.build.assetsRoot为vue cli生成的配置，打包后的文件地址</span></span><br><span class="line">            <span class="comment">// 配置要做预渲染的路由，只支持h5 history方式</span></span><br><span class="line">            [ <span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;/test&#x27;</span>]</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>以上 <code>2.x</code> 的写法，在 <code>3.x</code> 的版本会提示一个警告，让你采用对象的形式 </p>
+</li>
+<li><p>route 的 <code>history</code> 模式就是如下代码中配置 </p>
+<p>预渲染方式下的 route 采用 <code>history</code> 模式，经过试验 得采用history模式，否则每个index.html文件的内容都会是一样的。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;history&#x27;</span>,</span><br><span class="line">    <span class="attr">routes</span>: [</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><b>注意事项1:</b><code>history</code> 模式下的route，将不会以 <code>hash</code> 的形式展示，也就是说，URL里没有 <code>#</code> 了。</p>
+<p><b>注意事项2:</b>但是需要注意<code>history</code>这种模式会出现页面刷新后出现404页面问题。<a class="link"   target="_blank" rel="noopener" href="https://router.vuejs.org/zh/guide/essentials/history-mode.html" >vue.js官方教程里提到的解决办法可以参考<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/09/03/vue-cli4.0%E6%90%AD%E5%BB%BAvue%E9%A1%B9%E7%9B%AE/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">vue-cli4.0搭建vue项目</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">张渊</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

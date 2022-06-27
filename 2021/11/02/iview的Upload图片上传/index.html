@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
+    <meta name="keywords" content="张渊,张渊的博客,张渊的个人博客,执笔写下信念,小手冰凉">
+    <meta name="description" content="张渊的个人博客，用于记录个人的学习笔记和日常问题总结">
     <meta name="author" content="张渊">
     
     <title>
         
             iview的Upload图片上传 |
         
-        执笔写下信念
+        张渊的博客
     </title>
     
 <link rel="stylesheet" href="/css/style.css">
@@ -22,8 +22,8 @@
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
-    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","favicon":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"道阻且长，行则将至，行而不辍，未来可期。"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","favicon":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"道阻且长，行则将至，行而不辍，未来可期。"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -54,7 +54,7 @@
                 </a>
             
             <a class="logo-title" href="/">
-                执笔写下信念
+                张渊的博客
             </a>
         </div>
 
@@ -79,9 +79,15 @@
                         </li>
                     
                     
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
                 </ul>
             </div>
             <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
                 <div class="icon-item menu-bar">
                     <div class="menu-bar-middle"></div>
@@ -147,6 +153,14 @@
 
     
     
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>542 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
+        </span>
     
     
         <span class="article-pv article-meta-item">
@@ -165,6 +179,23 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;Upload</span><br><span class="line">     ref=&quot;upload&quot;</span><br><span class="line">     name=&quot;qmfile&quot;</span><br><span class="line">     :show-upload-list=&quot;false&quot;</span><br><span class="line">     :on-success=&quot;handleSuccess&quot;</span><br><span class="line">     :format=&quot;[&#x27;jpg&#x27;,&#x27;jpeg&#x27;,&#x27;png&#x27;]&quot;</span><br><span class="line">     :max-size=&quot;2048&quot;</span><br><span class="line">     :on-format-error=&quot;handleFormatError&quot;</span><br><span class="line">     :on-exceeded-size=&quot;handleMaxSize&quot;</span><br><span class="line">     :before-upload=&quot;handleBeforeUpload&quot;</span><br><span class="line">     type=&quot;drag&quot;</span><br><span class="line">     action=&quot;/activity/uploadIcon&quot;</span><br><span class="line">	&gt;</span><br><span class="line">      &lt;div style=&quot;display: flex;align-items: center;justify-content: center;height: 100%;&quot; v-if=&quot;!formParams.currentImgUrl&quot;&gt;</span><br><span class="line">        &lt;Icon type=&quot;md-add&quot; size=&quot;40&quot; color=&quot;#ffffff&quot;&gt;&lt;/Icon&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;img v-if=&quot;formParams.currentImgUrl&quot; :src=&quot;formParams.currentImgUrl&quot; alt=&quot;&quot; class=&quot;show-img&quot; /&gt;</span><br><span class="line">    &lt;/Upload&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	export default&#123;</span><br><span class="line">  	data()&#123;</span><br><span class="line">    	return&#123;</span><br><span class="line">      	formParams: &#123;</span><br><span class="line">          currentImgUrl: &#x27;&#x27;,//当前展示图片（也可以直接使用uploadList）</span><br><span class="line">          file: &#123;&#125;,//文件流</span><br><span class="line">          uploadList: [],//图片列表</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  	methods: &#123;</span><br><span class="line">    	handleSuccess (res, file) &#123;</span><br><span class="line">        		//上传成功返回处理</span><br><span class="line">            if(res.code == 10000)&#123;</span><br><span class="line">                this.formParams.currentImgUrl = res.img_path;</span><br><span class="line">                this.formParams.uploadList[0] = res.img_path;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                this.$Message.destroy();</span><br><span class="line">                this.$Message.error(res.msg);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        handleFormatError (file) &#123;</span><br><span class="line">            this.$Message.destroy();</span><br><span class="line">            this.$Message.warning(&#123;</span><br><span class="line">                content: file.name + &#x27;的文件格式不正确，请选择jpg或png&#x27;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        handleMaxSize (file) &#123;</span><br><span class="line">            this.$Message.destroy();</span><br><span class="line">            this.$Message.warning(&#123;</span><br><span class="line">                content: &#x27;文件  &#x27; + file.name + &#x27; 太大, 超出 2M.&#x27;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        handleBeforeUpload (file) &#123;</span><br><span class="line">        	//本地预览的两种方式</span><br><span class="line">          //1 转换成本地可预览路径 2 转换成Base64进行本地预览</span><br><span class="line">          // this.formParams.currentImgUrl = URL.createObjectURL(file);//本地可预览路径</span><br><span class="line">          this.formParams.file = &#123;&#125;;//清空上次</span><br><span class="line">          this.formParams.uploadList = [];//清空上次</span><br><span class="line">          this.formParams.file = file;</span><br><span class="line">          // 转换Base64</span><br><span class="line">          const reader = new FileReader();</span><br><span class="line">          reader.readAsDataURL(file);</span><br><span class="line">          reader.onload = () =&gt; &#123;</span><br><span class="line">            const _base64 = reader.result;</span><br><span class="line">            this.formParams.currentImgUrl = _base64;</span><br><span class="line">            this.formParams.uploadList[0] = _base64;</span><br><span class="line">          &#125;</span><br><span class="line">          //限制图片上传数量</span><br><span class="line">          const check = this.formParams.uploadList.length &lt; 1;</span><br><span class="line">          if (!check) &#123;</span><br><span class="line">            this.$Message.destroy();</span><br><span class="line">            this.$Message.warning(&#123;</span><br><span class="line">              content: &#x27;最多上传一张图片&#x27;</span><br><span class="line">            &#125;);</span><br><span class="line">          &#125;</span><br><span class="line">          return check;//false将不执行上传</span><br><span class="line">          //注意：手动上传可在此直接 return false，调用时直接使用：</span><br><span class="line">          //this.$refs.upload.post(this.formParams.file);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
         </div>
 
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：iview的Upload图片上传</li>
+        <li>Post author：张渊</li>
+        <li>Create time：2021-11-02 18:58:52</li>
+        <li>
+            Post link：https://zylucky.github.io/2021/11/02/iview的Upload图片上传/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
         
 
         
@@ -228,6 +259,14 @@
             <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
             <div class="website-count info-item">
                 
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
                 
             </div>
         
@@ -246,6 +285,10 @@
             <div class="post-tools-container">
     <ul class="tools-list">
         <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
         
 
         <!-- go comment -->
@@ -279,10 +322,6 @@
         
 
         
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
 
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
@@ -294,17 +333,59 @@
             <i class="fas fa-cog fa-spin"></i>
         </li>
         
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
     </ul>
 </div>
 
     </div>
 
     
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+        </aside>
+    
 
     <div class="image-viewer-container">
     <img src="">
 </div>
 
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
 
     
 
@@ -325,6 +406,10 @@
 
 
 
+    
+<script src="/js/local-search.js"></script>
+
+
 
 
     
@@ -335,6 +420,14 @@
 
 
 <div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
     
 </div>
 

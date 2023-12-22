@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="张渊,张渊的博客,张渊的个人博客,执笔写下信念,技术学习小站,小手冰凉,zhangyuan,zyluck,zylucky,luck">
+    <meta name="description" content="张渊的个人博客，用于记录个人的学习笔记和日常问题总结">
+    <meta name="author" content="张渊">
+    
+    <title>
+        
+            vue-cli搭建vue2项目改造ssr |
+        
+        张渊的博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.zylucky.cn","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"张渊的博客","author":"张渊","avatar":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","logo":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","favicon":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg"},"menu":{"Archives":"/archives"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"道阻且长，行则将至，行而不辍，未来可期。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/zylucky","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":"zyluckying@163.com"}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":false,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":["One","Two","Three","Trainee","Engineer","Architect"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"waline","valine":{"appid":"8z4NUyqeb6aAjw3AoeRxSc5w-MdYXbMMI","appkey":"sdU0a13xiVAq49ur6QrD8pas","server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":"https://blog-waline-kj3uqqv1f-zyluckys-projects.vercel.app","reaction":true,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"jsdelivr"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null,"/js/custom/run-time.js"]},"root":"","version":"4.0.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               张渊的博客
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        vue-cli搭建vue2项目改造ssr
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">张渊</span>
+                                
+                                    <span class="author-badge">Two</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
+                <span class="pc">2022-07-02 21:14:58</span>
+                <span class="mobile">2022-07-02 21:14</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="pc" data-updated="Sat Jul 02 2022 23:38:18 GMT+0800">2022-07-02 23:38:18</span>
+            </span>
+        
+
+        
+
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.6k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>12 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <p>记录一次vue-cli搭建vue2项目改造ssr全过程，附代码注释。</p>
+<h3 id="通过-vue-cli-创建-vue-项目"><a href="#通过-vue-cli-创建-vue-项目" class="headerlink" title="通过 vue-cli 创建 vue 项目"></a>通过 vue-cli 创建 vue 项目</h3><p>可参考我之前写的一篇文章 <a class="link"   target="_blank" rel="noopener" href="https://zylucky.github.io/2021/09/03/vue-cli4.0%E6%90%AD%E5%BB%BAvue%E9%A1%B9%E7%9B%AE/" >vue-cli4.0搭建vue项目<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="安装-vue-server-renderer"><a href="#安装-vue-server-renderer" class="headerlink" title="安装 vue-server-renderer"></a>安装 vue-server-renderer</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入项目目录执行</span></span><br><span class="line">npm install vue vue-server-renderer --save</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong></p>
+<ul>
+<li>推荐使用 Node.js 版本 6+。</li>
+<li>vue-server-renderer 和 vue 必须匹配版本。</li>
+<li>vue-server-renderer 依赖一些 Node.js 原生模块，因此只能在 Node.js<br>中使用。我们可能会提供一个更简单的构建，可以在将来在其他「JavaScript 运行时(runtime)」运行。</li>
+</ul>
+<h3 id="修改-src-router-index-js-文件"><a href="#修改-src-router-index-js-文件" class="headerlink" title="修改 src/router/index.js 文件"></a>修改 src/router/index.js 文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 解决访问重复路由报错问题：NavigationDuplicated: Avoided redundant navigation to current location: &quot;/xxx&quot; 开始 */</span></span><br><span class="line"><span class="keyword">const</span> originalPush = VueRouter.prototype.push</span><br><span class="line"><span class="comment">// 修改 原型对象中的push方法</span></span><br><span class="line">VueRouter.prototype.push = <span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params">location</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> originalPush.call(<span class="built_in">this</span>, location).catch(<span class="function"><span class="params">err</span> =&gt;</span> err)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 解决访问重复路由报错问题：NavigationDuplicated: Avoided redundant navigation to current location: &quot;/xxx&quot; 结束 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Home&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &quot;home&quot; */</span> <span class="string">&#x27;../views/Home.vue&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/about&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;About&#x27;</span>,</span><br><span class="line">    <span class="comment">// route level code-splitting</span></span><br><span class="line">    <span class="comment">// this generates a separate chunk (about.[hash].js) for this route</span></span><br><span class="line">    <span class="comment">// which is lazy-loaded when the route is visited.</span></span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &quot;about&quot; */</span> <span class="string">&#x27;../views/About.vue&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"><span class="comment">//每次用户请求都需要创建一个新的 router 实例</span></span><br><span class="line"><span class="comment">//创建 createRouter 工厂函数</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">createRouter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    routes</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改-src-store-index-js-文件"><a href="#修改-src-store-index-js-文件" class="headerlink" title="修改 src/store/index.js 文件"></a>修改 src/store/index.js 文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  <span class="attr">state</span>: &#123;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">mutations</span>: &#123;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">actions</span>: &#123;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">modules</span>: &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">createStore</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> store</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-src-app-js-入口文件"><a href="#创建-src-app-js-入口文件" class="headerlink" title="创建 src/app.js 入口文件"></a>创建 src/app.js 入口文件</h3><p>安装 <code>vuex-router-sync</code> 工具，该工具主要是将 <code>store</code> 跟 <code>router</code> 连接起来。详细了解可参考 <a class="link"   target="_blank" rel="noopener" href="https://github.com/vuejs/vuex-router-sync" >Vuex Router Sync<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入项目目录执行</span></span><br><span class="line">npm install vuex-router-sync</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码修改</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; createRouter &#125; <span class="keyword">from</span> <span class="string">&quot;./router&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&quot;./store&quot;</span>;</span><br><span class="line"><span class="comment">// 把 Vue Router 当前的 $route 同步为 Vuex 状态的一部分</span></span><br><span class="line"><span class="keyword">import</span> &#123; sync &#125; <span class="keyword">from</span> <span class="string">&quot;vuex-router-sync&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出一个工厂函数，用于创建新的</span></span><br><span class="line"><span class="comment">// 应用程序、router 和 store 实例</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">createApp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 创建router实例</span></span><br><span class="line">  <span class="keyword">const</span> router = createRouter()</span><br><span class="line">  <span class="keyword">const</span> store = createStore()</span><br><span class="line">  <span class="comment">// 同步路由状态(route state)到 store</span></span><br><span class="line">  sync(store, router)</span><br><span class="line">  <span class="comment">// 创建应用程序实例，将 router 和 store 注入</span></span><br><span class="line">  <span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    router,</span><br><span class="line">    store,</span><br><span class="line">    <span class="comment">// 根据实例简单的渲染用用程序组件</span></span><br><span class="line">    <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 暴露 app, router 和 store</span></span><br><span class="line">  <span class="keyword">return</span> &#123; app, router, store &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-src-entry-server-js-文件"><a href="#创建-src-entry-server-js-文件" class="headerlink" title="创建 src/entry-server.js 文件"></a>创建 src/entry-server.js 文件</h3><p>服务器 entry 使用 default export 导出函数，并在每次渲染中重复调用此函数。此时，除了创建和返回应用程序实例之外，它不会做太多事情 - 但是稍后我们将在此执行服务器端路由匹配 (server-side route matching) 和数据预取逻辑 (data pre-fetching logic)。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// entry-server.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&quot;./app&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> context =&gt; &#123;</span><br><span class="line">  <span class="comment">// 因为有可能会是异步路由钩子函数或组件，所以我们将返回一个 Promise，</span></span><br><span class="line">    <span class="comment">// 以便服务器能够等待所有的内容在渲染前，</span></span><br><span class="line">    <span class="comment">// 就已经准备就绪。</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; app, router, store &#125; = createApp()</span><br><span class="line">    <span class="comment">// 设置服务端 router 的位置</span></span><br><span class="line">    router.push(context.url)</span><br><span class="line">    <span class="comment">// 等到 router 将可能的异步组件和钩子函数解析完</span></span><br><span class="line">    router.onReady(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> matchedComponents = router.getMatchedComponents()</span><br><span class="line">      <span class="comment">// 匹配不到路由，执行reject函数，并返回404</span></span><br><span class="line">      <span class="keyword">if</span> (!matchedComponents.length) &#123;</span><br><span class="line">        <span class="keyword">return</span> reject(&#123; <span class="attr">code</span>: <span class="number">404</span> &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 对所有匹配的路由组件调用 `asyncData()`</span></span><br><span class="line">      <span class="built_in">Promise</span>.all(matchedComponents.map(<span class="function"><span class="params">Component</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (Component.asyncData) &#123;</span><br><span class="line">          <span class="keyword">return</span> Component.asyncData(&#123;</span><br><span class="line">            store,</span><br><span class="line">            <span class="attr">router</span>: router.currentRoute</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 在所有预取钩子(preFetch hook) resolve 后，</span></span><br><span class="line">        <span class="comment">// 我们的 store 现在已经填充入渲染应用程序所需的状态。</span></span><br><span class="line">        <span class="comment">// 当我们将状态附加到上下文，</span></span><br><span class="line">        <span class="comment">// 并且 `template` 选项用于 renderer 时，</span></span><br><span class="line">        <span class="comment">// 状态将自动序列化为 `window.__INITIAL_STATE__`，并注入 HTML。</span></span><br><span class="line">        context.state = store.state</span><br><span class="line">         <span class="comment">// Promise 应该 resolve 应用程序实例，以便它可以渲染</span></span><br><span class="line">        resolve(app)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;, reject)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-src-entry-client-js-文件"><a href="#创建-src-entry-client-js-文件" class="headerlink" title="创建 src/entry-client.js 文件"></a>创建 src/entry-client.js 文件</h3><p>客户端 entry 只需创建应用程序，并且将其挂载到 DOM 中：</p>
+<p><strong>代码</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// entry-client.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;./app&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; app, router, store &#125; = createApp();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.__INITIAL_STATE__) &#123;</span><br><span class="line">  store.replaceState(<span class="built_in">window</span>.__INITIAL_STATE__)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">router.onReady(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 添加路由钩子函数，用于处理 asyncData.</span></span><br><span class="line">  <span class="comment">// 在初始路由 resolve 后执行，</span></span><br><span class="line">  <span class="comment">// 以便我们不会二次预取(double-fetch)已有的数据。</span></span><br><span class="line">  <span class="comment">// 使用 `router.beforeResolve()`，以便确保所有异步组件都 resolve。</span></span><br><span class="line">  router.beforeResolve(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> matched = router.getMatchedComponents(to)</span><br><span class="line">    <span class="keyword">const</span> prevMatched = router.getMatchedComponents(<span class="keyword">from</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 我们只关心非预渲染的组件</span></span><br><span class="line">    <span class="comment">// 所以我们对比它们，找出两个匹配列表的差异组件</span></span><br><span class="line">    <span class="keyword">let</span> diffed = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">const</span> activated = matched.filter(<span class="function">(<span class="params">c, i</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> diffed || (diffed = (prevMatched[i] !== c))</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!activated.length) &#123;</span><br><span class="line">      <span class="keyword">return</span> next()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这里如果有加载指示器 (loading indicator)，就触发</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">Promise</span>.all(activated.map(<span class="function"><span class="params">c</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (c.asyncData) &#123;</span><br><span class="line">        <span class="keyword">return</span> c.asyncData(&#123; store, <span class="attr">route</span>: to &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 停止加载指示器(loading indicator)</span></span><br><span class="line"></span><br><span class="line">      next()</span><br><span class="line">    &#125;).catch(next)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  app.$mount(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建页面模板-public-index-template-html"><a href="#创建页面模板-public-index-template-html" class="headerlink" title="创建页面模板 public/index.template.html"></a>创建页面模板 public/index.template.html</h3><p>当你在渲染 Vue 应用程序时，renderer 只从应用程序生成 HTML 标记 (markup)。在这个示例中，我们必须用一个额外的 HTML 页面包裹容器，来包裹生成的 HTML 标记。<br><strong>注意</strong> <code>&lt;!--vue-ssr-outlet--&gt;</code> 注释 – 这里将是应用程序 HTML 标记注入的地方，中间不能有空格。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width,initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--vue-ssr-outlet--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建一个-Node-js-web服务器"><a href="#创建一个-Node-js-web服务器" class="headerlink" title="创建一个 Node.js web服务器"></a>创建一个 Node.js web服务器</h3><p>与服务器集成，在 Node.js 服务器中使用时相当简单直接，例如 <a class="link"   target="_blank" rel="noopener" href="https://expressjs.com/" >Express<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入项目目录执行</span></span><br><span class="line">npm install express --save</span><br></pre></td></tr></table></figure>
+
+<p>项目根目录下创建 server.js 文件，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; createBundleRenderer &#125; = <span class="built_in">require</span>(<span class="string">&#x27;vue-server-renderer&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> serverBundle = <span class="built_in">require</span>(<span class="string">&#x27;./dist/server/vue-ssr-server-bundle.json&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> clientManifest = <span class="built_in">require</span>(<span class="string">&#x27;./dist/client/vue-ssr-client-manifest.json&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> template = fs.readFileSync(path.resolve(<span class="string">&#x27;./public/index.template.html&#x27;</span>), <span class="string">&#x27;utf-8&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> render = createBundleRenderer(serverBundle, &#123;</span><br><span class="line">  <span class="attr">runInNewContext</span>: <span class="literal">false</span>, <span class="comment">// 推荐</span></span><br><span class="line">  template, <span class="comment">// （可选）页面模板</span></span><br><span class="line">  clientManifest <span class="comment">// （可选）客户端构建 manifest</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(express.static(<span class="string">&#x27;./dist/client&#x27;</span>, &#123; <span class="attr">index</span>: <span class="literal">false</span> &#125;))</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;*&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> context = &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;vue2-ssr-template&#x27;</span>,</span><br><span class="line">    <span class="attr">url</span>: req.url</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 这里无需传入一个应用程序，因为在执行 bundle 时已经自动创建过。</span></span><br><span class="line">  <span class="comment">// 现在我们的服务器与应用程序已经解耦！</span></span><br><span class="line">  render.renderToString(context, <span class="function">(<span class="params">err, html</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(html)</span><br><span class="line">    <span class="comment">// 处理异常……</span></span><br><span class="line">    res.end(html)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 访问端口</span></span><br><span class="line"><span class="keyword">const</span> port = <span class="number">3003</span>;</span><br><span class="line">app.listen(port, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`server started at localhost:<span class="subst">$&#123;port&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-vue-config-js"><a href="#配置-vue-config-js" class="headerlink" title="配置 vue.config.js"></a>配置 vue.config.js</h3><ul>
+<li>vue-cli4 脚手架搭建完成后，项目目录中没有 <code>vue.config.js</code> 文件，需要手动创建。<code>vue.config.js</code> 是一个可选的配置文件，如果项目的 (和 <code>package.json</code> 同级的) 根目录中存在这个文件，那么它会被 <code>@vue/cli-service</code> 自动加载。</li>
+<li>根目录下创建 <code>vue.config.js</code> ，已创建可忽略。</li>
+</ul>
+<p><strong>注意：</strong>配置文件中用到了 <code>lodash.merge</code> 合并对象，安装命令 <code>npm install lodash.merge --save</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="keyword">const</span> VueSSRServerPlugin = <span class="built_in">require</span>(<span class="string">&#x27;vue-server-renderer/server-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> VueSSRClientPlugin = <span class="built_in">require</span>(<span class="string">&#x27;vue-server-renderer/client-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> nodeExternals = <span class="built_in">require</span>(<span class="string">&#x27;webpack-node-externals&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> merge = <span class="built_in">require</span>(<span class="string">&#x27;lodash.merge&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> TARGET_NODE = process.env.WEBPACK_TARGET === <span class="string">&#x27;node&#x27;</span></span><br><span class="line"><span class="keyword">const</span> target = TARGET_NODE ? <span class="string">&#x27;server&#x27;</span> : <span class="string">&#x27;client&#x27;</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">css</span>: &#123;</span><br><span class="line">    <span class="attr">extract</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">outputDir</span>: <span class="string">&quot;./dist/&quot;</span> + target,</span><br><span class="line">  <span class="attr">configureWebpack</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="comment">// 将 entry 指向应用程序的 server / client 文件</span></span><br><span class="line">    <span class="attr">entry</span>: <span class="string">`./src/entry-<span class="subst">$&#123;target&#125;</span>.js`</span>,</span><br><span class="line">    <span class="comment">// 对 bundle renderer 提供 source map 支持</span></span><br><span class="line">    <span class="attr">devtool</span>: <span class="string">&#x27;source-map&#x27;</span>,</span><br><span class="line">    <span class="attr">target</span>: TARGET_NODE ? <span class="string">&#x27;node&#x27;</span> : <span class="string">&#x27;web&#x27;</span>,</span><br><span class="line">    <span class="attr">node</span>: TARGET_NODE ? <span class="literal">undefined</span> : <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">      <span class="attr">libraryTarget</span>: TARGET_NODE ? <span class="string">&#x27;commonjs2&#x27;</span> : <span class="literal">undefined</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// https://webpack.js.org/configuration/externals/#function</span></span><br><span class="line">    <span class="comment">// https://github.com/liady/webpack-node-externals</span></span><br><span class="line">    <span class="comment">// 外置化应用程序依赖模块。可以使服务器构建速度更快，</span></span><br><span class="line">    <span class="comment">// 并生成较小的 bundle 文件。</span></span><br><span class="line">    <span class="attr">externals</span>: TARGET_NODE</span><br><span class="line">      ? nodeExternals(&#123;</span><br><span class="line">        <span class="comment">// 不要外置化 webpack 需要处理的依赖模块。</span></span><br><span class="line">        <span class="comment">// 你可以在这里添加更多的文件类型。例如，未处理 *.vue 原始文件，</span></span><br><span class="line">        <span class="comment">// 你还应该将修改 `global`（例如 polyfill）的依赖模块列入白名单</span></span><br><span class="line">        <span class="attr">allowlist</span>: [<span class="regexp">/\.css$/</span>]</span><br><span class="line">      &#125;)</span><br><span class="line">      : <span class="literal">undefined</span>,</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">      <span class="attr">splitChunks</span>: TARGET_NODE ? <span class="literal">false</span> : <span class="literal">undefined</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [TARGET_NODE ? <span class="keyword">new</span> VueSSRServerPlugin() : <span class="keyword">new</span> VueSSRClientPlugin()]</span><br><span class="line">  &#125;),</span><br><span class="line">  <span class="attr">chainWebpack</span>: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    config.module</span><br><span class="line">      .rule(<span class="string">&#x27;vue&#x27;</span>)</span><br><span class="line">      .use(<span class="string">&#x27;vue-loader&#x27;</span>)</span><br><span class="line">      .tap(<span class="function"><span class="params">options</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> merge(options, &#123;</span><br><span class="line">          <span class="attr">optimizeSSR</span>: <span class="literal">false</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置项目打包脚本"><a href="#配置项目打包脚本" class="headerlink" title="配置项目打包脚本"></a>配置项目打包脚本</h3><p>配置脚本需要用到 <code>cross-env</code> 插件，主要是用来运行跨平台设置和使用环境变量的脚本。</p>
+<p><strong>安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cross-env --save</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用</strong></p>
+<p>在 package.json 文件中，scripts选项下，添加以下脚本：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="attr">&quot;serve&quot;</span>: <span class="string">&quot;vue-cli-service serve&quot;</span>, <span class="comment">// 项目运行命令</span></span><br><span class="line">  <span class="attr">&quot;build&quot;</span>: <span class="string">&quot;npm run build:server &amp;&amp; npm run build:client&quot;</span>, <span class="comment">// 打包服务端、客户端</span></span><br><span class="line">  <span class="attr">&quot;build:client&quot;</span>: <span class="string">&quot;vue-cli-service build&quot;</span>, <span class="comment">// 打包客户端</span></span><br><span class="line">  <span class="attr">&quot;build:server&quot;</span>: <span class="string">&quot;cross-env WEBPACK_TARGET=node vue-cli-service build&quot;</span>, <span class="comment">// 打包服务端</span></span><br><span class="line">  <span class="attr">&quot;server&quot;</span>: <span class="string">&quot;node server&quot;</span>, <span class="comment">// 启动node服务环境</span></span><br><span class="line">  <span class="attr">&quot;start&quot;</span>: <span class="string">&quot;npm run build:server &amp;&amp; npm run build:client &amp;&amp; npm run server&quot;</span> <span class="comment">// // 打包服务端、客户端并启动node服务环境</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此整个ssr改造完成，可通过 <code>npm run start</code> 在本地环境编译打包启动node服务，访问 <code>http://localhost:3003</code> 查看运行效果。</p>
+<p><strong>注意：</strong>端口号可根据自己配置进行访问</p>
+<p>查看网页源代码发现根元素上添加了一个特殊的属性：<code>data-server-rendered</code>，该属性让客户端 Vue 知道这部分 HTML 是由 Vue 在服务端渲染的，并且应该以激活模式进行挂载</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span> <span class="attr">data-server-rendered</span>=<span class="string">&quot;true&quot;</span>&gt;</span>......<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><h4 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public</span><br><span class="line">├── favicon.ico</span><br><span class="line">├── index.html</span><br><span class="line">└── index.template.html <span class="comment"># 页面模板</span></span><br><span class="line">src</span><br><span class="line">├── components <span class="comment"># 组件</span></span><br><span class="line">├── router <span class="comment"># 路由文件</span></span><br><span class="line">│   └──  index.js</span><br><span class="line">├── store <span class="comment"># 状态管理</span></span><br><span class="line">│   └──  index.js</span><br><span class="line">├── app.js <span class="comment"># 通用 entry(universal entry)</span></span><br><span class="line">├── App.vue</span><br><span class="line">├── entry-client.js <span class="comment"># 仅运行于浏览器</span></span><br><span class="line">└── entry-server.js <span class="comment"># 仅运行于服务器</span></span><br><span class="line">vue.config.js <span class="comment"># vue构建配置</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="打包后-dist-目录结构"><a href="#打包后-dist-目录结构" class="headerlink" title="打包后 dist 目录结构"></a>打包后 <code>dist</code> 目录结构</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">client <span class="comment"># 客户端打包文件</span></span><br><span class="line">├── img</span><br><span class="line">├── js</span><br><span class="line">├── favicon.ico</span><br><span class="line">├── index.html</span><br><span class="line">├── index.template.html</span><br><span class="line">└── vue-ssr-client-manifest.json</span><br><span class="line">server <span class="comment"># 服务端打包文件</span></span><br><span class="line">└── vue-ssr-server-bundle.json</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a class="link"   target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/guide/" >Vue CLI<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/" >Vue.js<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://router.vuejs.org/zh/introduction.html" >Vue Router<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://vuex.vuejs.org/zh/" >Vuex<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://ssr.vuejs.org/zh/" >Vue SSR 指南<i class="fas fa-external-link-alt"></i></a></p>
+
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                vue-cli搭建vue2项目改造ssr
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                5e6aae49.html
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">张渊</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2022-07-02 21:14</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">
+                        <i class="fa-brands fa-creative-commons"></i>
+                        <i class="fa-brands fa-creative-commons-by"></i>
+                        <i class="fa-brands fa-creative-commons-nc"></i>
+                        <i class="fa-brands fa-creative-commons-sa"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/51a3f45e.html"
+                                   title="记常遇到的JS手写"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">记常遇到的JS手写</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-vue-cli-%E5%88%9B%E5%BB%BA-vue-%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">通过 vue-cli 创建 vue 项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-vue-server-renderer"><span class="nav-number">2.</span> <span class="nav-text">安装 vue-server-renderer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-src-router-index-js-%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">修改 src&#x2F;router&#x2F;index.js 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-src-store-index-js-%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">修改 src&#x2F;store&#x2F;index.js 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-src-app-js-%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">创建 src&#x2F;app.js 入口文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-src-entry-server-js-%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">创建 src&#x2F;entry-server.js 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-src-entry-client-js-%E6%96%87%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">创建 src&#x2F;entry-client.js 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B5%E9%9D%A2%E6%A8%A1%E6%9D%BF-public-index-template-html"><span class="nav-number">8.</span> <span class="nav-text">创建页面模板 public&#x2F;index.template.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA-Node-js-web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">9.</span> <span class="nav-text">创建一个 Node.js web服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-vue-config-js"><span class="nav-number">10.</span> <span class="nav-text">配置 vue.config.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E8%84%9A%E6%9C%AC"><span class="nav-number">11.</span> <span class="nav-text">配置项目打包脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">12.</span> <span class="nav-text">最后</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">12.1.</span> <span class="nav-text">项目目录结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E5%90%8E-dist-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">12.2.</span> <span class="nav-text">打包后 dist 目录结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">13.</span> <span class="nav-text">参考资料</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2023
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">张渊</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span> 提供部署服务
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">12.9k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-vue-cli-%E5%88%9B%E5%BB%BA-vue-%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">通过 vue-cli 创建 vue 项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-vue-server-renderer"><span class="nav-number">2.</span> <span class="nav-text">安装 vue-server-renderer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-src-router-index-js-%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">修改 src&#x2F;router&#x2F;index.js 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-src-store-index-js-%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">修改 src&#x2F;store&#x2F;index.js 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-src-app-js-%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">创建 src&#x2F;app.js 入口文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-src-entry-server-js-%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">创建 src&#x2F;entry-server.js 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-src-entry-client-js-%E6%96%87%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">创建 src&#x2F;entry-client.js 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B5%E9%9D%A2%E6%A8%A1%E6%9D%BF-public-index-template-html"><span class="nav-number">8.</span> <span class="nav-text">创建页面模板 public&#x2F;index.template.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA-Node-js-web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">9.</span> <span class="nav-text">创建一个 Node.js web服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-vue-config-js"><span class="nav-number">10.</span> <span class="nav-text">配置 vue.config.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E8%84%9A%E6%9C%AC"><span class="nav-number">11.</span> <span class="nav-text">配置项目打包脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">12.</span> <span class="nav-text">最后</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">12.1.</span> <span class="nav-text">项目目录结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E5%90%8E-dist-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">12.2.</span> <span class="nav-text">打包后 dist 目录结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">13.</span> <span class="nav-text">参考资料</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+            
+<script src="/js/post/copyright-info.js"></script>
+
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

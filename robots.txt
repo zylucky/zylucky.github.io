@@ -1,0 +1,5 @@
+# hexo robots.txt
+User-agent: *
+Allow: /
+Sitemap: https://www.zylucky.cn/sitemap.xml
+Sitemap: https://www.zylucky.cn/baidusitemap.xml

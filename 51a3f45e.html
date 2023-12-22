@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="张渊,张渊的博客,张渊的个人博客,执笔写下信念,技术学习小站,小手冰凉,zhangyuan,zyluck,zylucky,luck">
+    <meta name="description" content="张渊的个人博客，用于记录个人的学习笔记和日常问题总结">
+    <meta name="author" content="张渊">
+    
+    <title>
+        
+            记常遇到的JS手写 |
+        
+        张渊的博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.zylucky.cn","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"张渊的博客","author":"张渊","avatar":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","logo":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","favicon":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg"},"menu":{"Archives":"/archives"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"道阻且长，行则将至，行而不辍，未来可期。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/zylucky","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":"zyluckying@163.com"}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":false,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":["One","Two","Three","Trainee","Engineer","Architect"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"waline","valine":{"appid":"8z4NUyqeb6aAjw3AoeRxSc5w-MdYXbMMI","appkey":"sdU0a13xiVAq49ur6QrD8pas","server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":"https://blog-waline-kj3uqqv1f-zyluckys-projects.vercel.app","reaction":true,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"jsdelivr"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null,"/js/custom/run-time.js"]},"root":"","version":"4.0.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               张渊的博客
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        记常遇到的JS手写
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">张渊</span>
+                                
+                                    <span class="author-badge">Two</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
+                <span class="pc">2022-06-29 18:10:38</span>
+                <span class="mobile">2022-06-29 18:10</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="pc" data-updated="Wed Jun 29 2022 22:10:01 GMT+0800">2022-06-29 22:10:01</span>
+            </span>
+        
+
+        
+
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.4k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>7 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <p>面试中遇到的一些JS手写题以及一些常见的JS手写题记录。</p>
+<h3 id="手写-call、apply-和-bind"><a href="#手写-call、apply-和-bind" class="headerlink" title="手写 call、apply 和 bind"></a>手写 call、apply 和 bind</h3><h4 id="call、apply和bind三者的用法和区别"><a href="#call、apply和bind三者的用法和区别" class="headerlink" title="call、apply和bind三者的用法和区别"></a>call、apply和bind三者的用法和区别</h4><p>call、apply和bind这三个函数的第一个参数都是this指向函数，第二个参数有差别</p>
+<ul>
+<li>call后面的参数都是直接以逗号分隔开依次写在后面传递的；</li>
+<li>apply的后一个参数是以数组形式传递的，有多个参数都需要写在数组中进行传递；</li>
+<li>bind的除了返回是函数之外，他的参数和call一样；</li>
+</ul>
+<p>三者参数不限定是string类型，允许是各种类型，包括函数、object等。</p>
+<h4 id="手写-call"><a href="#手写-call" class="headerlink" title="手写 call"></a>手写 call</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原型myCall方法</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.myCall = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// getName函数</span></span><br><span class="line">    <span class="built_in">console</span>.log(context); <span class="comment">// 传递的参数person1</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">this</span> !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;error&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    context = context || <span class="built_in">window</span>;</span><br><span class="line">    <span class="comment">// 考虑参数</span></span><br><span class="line">    <span class="comment">// 拿到除了第一个参数之外的参数</span></span><br><span class="line">    <span class="keyword">var</span> args = [...arguments].slice(<span class="number">1</span>);</span><br><span class="line">    context.fn = <span class="built_in">this</span>; <span class="comment">// 改变this指向</span></span><br><span class="line">    <span class="keyword">var</span> result = context.fn(...args);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;执笔写下信念&#x27;</span>,</span><br><span class="line">    <span class="attr">getName</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;小手冰凉&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(person.getName.myCall(person1, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="手写-apply"><a href="#手写-apply" class="headerlink" title="手写 apply"></a>手写 apply</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myApply = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(context); <span class="comment">// 参数</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// getName函数</span></span><br><span class="line">    context = context || <span class="built_in">window</span>;</span><br><span class="line">    context.fn = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">let</span> result;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">arguments</span>[<span class="number">1</span>]) &#123;</span><br><span class="line">        result = context.fn([...arguments[<span class="number">1</span>]]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        result = context.fn();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span> context.fn;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">	name = <span class="string">&quot;小手冰凉&quot;</span>,</span><br><span class="line">    <span class="attr">getName</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">arguments</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> people = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;纸币写下信念&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(person.getName.myApply(people, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]));</span><br></pre></td></tr></table></figure>
+<h4 id="手写-bind"><a href="#手写-bind" class="headerlink" title="手写 bind"></a>手写 bind</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> self = <span class="built_in">this</span>;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">this</span> !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;error&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  context = context || <span class="built_in">window</span>;</span><br><span class="line">  <span class="comment">// 获取除第一个参数外的所有参数</span></span><br><span class="line">  <span class="keyword">const</span> args = [...arguments].slice(<span class="number">1</span>);</span><br><span class="line">  context.fn = self;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 参数合并</span></span><br><span class="line">    <span class="keyword">const</span> allArg = [...args, ...arguments];</span><br><span class="line">    <span class="keyword">const</span> result = context.fn(...allArg);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;纸币写下信念&#x27;</span>,</span><br><span class="line">  <span class="attr">getName</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;小手冰凉&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> p1 = person.getName.myBind(person1, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>);</span><br><span class="line"><span class="built_in">console</span>.log(p1(<span class="number">40</span>, <span class="number">50</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="手写-flat"><a href="#手写-flat" class="headerlink" title="手写 flat"></a>手写 flat</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现一个flat</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.myFlat = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 不传n默认为1</span></span><br><span class="line">  <span class="keyword">if</span> (!n) &#123;</span><br><span class="line">    n = <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> self = <span class="built_in">this</span>;</span><br><span class="line">  <span class="keyword">const</span> fn = <span class="function">(<span class="params">arr, n</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> res = [];</span><br><span class="line">    <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> arr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(arr[i])) &#123;</span><br><span class="line">        res = res.concat(fn(arr[i], n - <span class="number">1</span>));</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res = res.concat(arr[i]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> fn(self, n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// reduce方式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFlat</span>(<span class="params">arr, n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr.reduce(<span class="function">(<span class="params">res, value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(value)) &#123;</span><br><span class="line">      res = res.concat(myFlat(value, n - <span class="number">1</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      res = res.concat(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;, [])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, [<span class="number">1</span>, <span class="number">3</span>, [<span class="number">54</span>, <span class="number">3</span>, <span class="number">4</span>]], [<span class="number">22</span>, <span class="number">546</span>, [<span class="number">123</span>, <span class="number">435</span>, <span class="number">123</span>], <span class="number">3</span>]];</span><br><span class="line"><span class="built_in">console</span>.log(arr.myFlat(<span class="number">2</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数柯里化"><a href="#函数柯里化" class="headerlink" title="函数柯里化"></a>函数柯里化</h3><p>柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">fn, ...args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; length &#125; = fn;</span><br><span class="line">  <span class="keyword">if</span> (length &lt;= args.length) &#123;</span><br><span class="line">    <span class="keyword">return</span> fn(...args);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> curry.bind(<span class="literal">null</span>, fn, ...args)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 普通函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a, b, c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 柯里化函数</span></span><br><span class="line"><span class="keyword">const</span> _fn = curry(fn);</span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line">fn(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// 1 2 3</span></span><br><span class="line">_fn(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>); <span class="comment">// 1 2 3 </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="手写-Promise"><a href="#手写-Promise" class="headerlink" title="手写 Promise"></a>手写 Promise</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基础架构</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyPromise</span>(<span class="params">excutor</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="built_in">this</span>;</span><br><span class="line">  self.status = <span class="string">&#x27;pending&#x27;</span>;</span><br><span class="line">  self.value = <span class="literal">null</span>;</span><br><span class="line">  self.reason = <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">// 发布订阅模式、支持异步</span></span><br><span class="line">  self.onFulfilledCallback = [];</span><br><span class="line">  self.onRejectedCallback = [];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 成功回调</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 状态判断</span></span><br><span class="line">    <span class="keyword">if</span> (self.status === <span class="string">&#x27;pending&#x27;</span>) &#123;</span><br><span class="line">      self.value = value;</span><br><span class="line">      self.status = <span class="string">&#x27;fulfilled&#x27;</span>;</span><br><span class="line">      <span class="comment">// 状态改变就  执行 =&gt; 发布</span></span><br><span class="line">      self.onFulfilledCallback.forEach(<span class="function"><span class="params">item</span> =&gt;</span> item(value));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 失败回调</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reject</span>(<span class="params">reason</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (self.status === <span class="string">&#x27;pending&#x27;</span>) &#123;</span><br><span class="line">      self.reason = reason;</span><br><span class="line">      self.status = <span class="string">&#x27;rejected&#x27;</span>;</span><br><span class="line">      <span class="comment">// 状态改变就  执行 =&gt; 发布</span></span><br><span class="line">      self.onFulfilledCallback.forEach(<span class="function"><span class="params">item</span> =&gt;</span> item(reason));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加立即执行器</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    excutor(resolve, reject);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. then方法，接收一个成功的回调和一个失败的回调</span></span><br><span class="line">MyPromise.prototype.then = <span class="function"><span class="keyword">function</span> (<span class="params">onFulfilled, onRejected</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 6. 状态更改了就会调用.then()</span></span><br><span class="line">  onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">&#x27;function&#x27;</span> ? onFulfilled : <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123; <span class="keyword">return</span> data &#125;;</span><br><span class="line">  onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">&#x27;function&#x27;</span> ? onRejected : <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123; <span class="keyword">throw</span> err &#125;;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="built_in">this</span>;</span><br><span class="line">  <span class="comment">// 8. 订阅操作</span></span><br><span class="line">  <span class="comment">// if (self.status === &#x27;pending&#x27;) &#123;</span></span><br><span class="line">  <span class="comment">//     self.onFulfilledCallback.push(onFulfilled);</span></span><br><span class="line">  <span class="comment">//     self.onRejectedCallback.push(onRejected);</span></span><br><span class="line">  <span class="comment">// &#125;</span></span><br><span class="line">  <span class="keyword">if</span> (self.status === <span class="string">&#x27;pending&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      self.onFulfilledCallback.push(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> x = onFulfilled(self.value);</span><br><span class="line">        x <span class="keyword">instanceof</span> MyPromise ? x.then(resolve, reject) : resolve(x);</span><br><span class="line">      &#125;);</span><br><span class="line">      self.onRejectedCallback.push(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> x = onFulfilled(self.value);</span><br><span class="line">        x <span class="keyword">instanceof</span> MyPromise ? x.then(resolve, reject) : resolve(x);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (self.status === <span class="string">&#x27;fulfilled&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> x = onFulfilled(self.value);</span><br><span class="line">        x <span class="keyword">instanceof</span> MyPromise ? x.then(resolve, reject) : resolve(x);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        reject(error);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (self.status === <span class="string">&#x27;rejected&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> x = onRejected(self.value);</span><br><span class="line">        x <span class="keyword">instanceof</span> MyPromise ? x.then(resolve, reject) : resolve(x);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        reject(error);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyPromise.prototype.catch = <span class="function"><span class="keyword">function</span> (<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.then(<span class="literal">null</span>, fn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MyPromise.resolve()方法</span></span><br><span class="line">MyPromise.resolve = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value <span class="keyword">instanceof</span> MyPromise ? value : <span class="keyword">new</span> MyPromise(<span class="function"><span class="params">resolve</span> =&gt;</span> resolve(value));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MyPromise.reject()方法</span></span><br><span class="line">MyPromise.reject = <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> MyPromise(<span class="function"><span class="params">reject</span> =&gt;</span> reject(error));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MyPromise.all()方法</span></span><br><span class="line">MyPromise.all = <span class="function"><span class="keyword">function</span>(<span class="params">promiseArr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> result = [];</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> MyPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// promiseArr为0直接返回result</span></span><br><span class="line">    <span class="keyword">if</span>(!promiseArr.length)&#123;</span><br><span class="line">      resolve(result);</span><br><span class="line">    &#125;</span><br><span class="line">    promiseArr.forEach(<span class="function">(<span class="params">p, idx</span>) =&gt;</span> &#123;</span><br><span class="line">      MyPromise.resolve(p).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        count++;</span><br><span class="line">        result[idx] = value;</span><br><span class="line">        <span class="keyword">if</span>(count === promiseArr.length)&#123;</span><br><span class="line">          resolve(result);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">        reject(error);</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MyPromise.race()方法</span></span><br><span class="line">MyPromise.race = <span class="function"><span class="keyword">function</span>(<span class="params">promiseArr</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">new</span> MyPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">     promiseArr.forEach(<span class="function"><span class="params">p</span> =&gt;</span> &#123;</span><br><span class="line">       MyPromise.resolve(p).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">         resolve(value);</span><br><span class="line">       &#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">         reject(error);</span><br><span class="line">       &#125;)</span><br><span class="line">     &#125;)</span><br><span class="line">   &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">let</span> demo = <span class="keyword">new</span> MyPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;MyPromise 已经完成&#x27;</span>);</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="number">1</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;);</span><br><span class="line">demo.then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                记常遇到的JS手写
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                51a3f45e.html
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">张渊</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2022-06-29 18:10</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">
+                        <i class="fa-brands fa-creative-commons"></i>
+                        <i class="fa-brands fa-creative-commons-by"></i>
+                        <i class="fa-brands fa-creative-commons-nc"></i>
+                        <i class="fa-brands fa-creative-commons-sa"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/5e6aae49.html"
+                                   title="vue-cli搭建vue2项目改造ssr"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">vue-cli搭建vue2项目改造ssr</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/29cde879.html"
+                                   title="JavaScript几种继承方式及优缺点整理"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">JavaScript几种继承方式及优缺点整理</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%86%99-call%E3%80%81apply-%E5%92%8C-bind"><span class="nav-number">1.</span> <span class="nav-text">手写 call、apply 和 bind</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#call%E3%80%81apply%E5%92%8Cbind%E4%B8%89%E8%80%85%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">call、apply和bind三者的用法和区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%86%99-call"><span class="nav-number">1.2.</span> <span class="nav-text">手写 call</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%86%99-apply"><span class="nav-number">1.3.</span> <span class="nav-text">手写 apply</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%86%99-bind"><span class="nav-number">1.4.</span> <span class="nav-text">手写 bind</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%86%99-flat"><span class="nav-number">2.</span> <span class="nav-text">手写 flat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">函数柯里化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%86%99-Promise"><span class="nav-number">4.</span> <span class="nav-text">手写 Promise</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2023
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">张渊</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span> 提供部署服务
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">12.9k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%86%99-call%E3%80%81apply-%E5%92%8C-bind"><span class="nav-number">1.</span> <span class="nav-text">手写 call、apply 和 bind</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#call%E3%80%81apply%E5%92%8Cbind%E4%B8%89%E8%80%85%E7%9A%84%E7%94%A8%E6%B3%95%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">call、apply和bind三者的用法和区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%86%99-call"><span class="nav-number">1.2.</span> <span class="nav-text">手写 call</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%86%99-apply"><span class="nav-number">1.3.</span> <span class="nav-text">手写 apply</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%86%99-bind"><span class="nav-number">1.4.</span> <span class="nav-text">手写 bind</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%86%99-flat"><span class="nav-number">2.</span> <span class="nav-text">手写 flat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">函数柯里化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%86%99-Promise"><span class="nav-number">4.</span> <span class="nav-text">手写 Promise</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+            
+<script src="/js/post/copyright-info.js"></script>
+
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

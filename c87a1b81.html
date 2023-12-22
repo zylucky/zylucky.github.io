@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="张渊,张渊的博客,张渊的个人博客,执笔写下信念,技术学习小站,小手冰凉,zhangyuan,zyluck,zylucky,luck">
+    <meta name="description" content="张渊的个人博客，用于记录个人的学习笔记和日常问题总结">
+    <meta name="author" content="张渊">
+    
+    <title>
+        
+            vue-cli4.0搭建vue项目 |
+        
+        张渊的博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.zylucky.cn","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"张渊的博客","author":"张渊","avatar":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","logo":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","favicon":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg"},"menu":{"Archives":"/archives"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"道阻且长，行则将至，行而不辍，未来可期。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/zylucky","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":"zyluckying@163.com"}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":false,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":["One","Two","Three","Trainee","Engineer","Architect"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"waline","valine":{"appid":"8z4NUyqeb6aAjw3AoeRxSc5w-MdYXbMMI","appkey":"sdU0a13xiVAq49ur6QrD8pas","server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":"https://blog-waline-kj3uqqv1f-zyluckys-projects.vercel.app","reaction":true,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"jsdelivr"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null,"/js/custom/run-time.js"]},"root":"","version":"4.0.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               张渊的博客
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        vue-cli4.0搭建vue项目
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">张渊</span>
+                                
+                                    <span class="author-badge">Two</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
+                <span class="pc">2021-09-03 22:36:02</span>
+                <span class="mobile">2021-09-03 22:36</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="pc" data-updated="Sat Sep 04 2021 00:28:10 GMT+0800">2021-09-04 00:28:10</span>
+            </span>
+        
+
+        
+
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.3k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>10 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>随着vue-cli脚手架的升级，vue-cli2.0版本与vue-cli3.0+版本搭建出来的vue项目也有了一些变化，下面是整理的个人从脚手架升级到vue项目创建的一个过程。</p>
+<ul>
+<li>本项目还会融合<code>axios</code>请求封装，可运行实测；</li>
+<li>接口统一管理，以及调用方式使用；</li>
+<li>环境区分（开发、生产、预生产、测试）；<h3 id="升级vue脚手架"><a href="#升级vue脚手架" class="headerlink" title="升级vue脚手架"></a>升级vue脚手架</h3></li>
+<li>全局卸载旧版本脚手架（已升级可忽略）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall vue-cli -g    或</span><br><span class="line">yarn remove vue-cli -g</span><br></pre></td></tr></table></figure></li>
+<li>node安装最近的版本（不必是最新），我本机安装版本<code>v12.16.1</code></li>
+<li>安装最新的vue-cli<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br></pre></td></tr></table></figure></li>
+<li>查看是否已经安装成功<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue --version 或 vue -V //查看版本号</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>注意</strong>：vue-cli2.0升级后（3.0+以上）如果你还需要遗产vue init功能，可以安装一个全局桥，这样你就可以继续运行你的vue-cli2.X版本的项目以及通过之前的<code>vue init webpack &#39;项目名&#39;</code>来创建项目了，命令行如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli-init</span><br></pre></td></tr></table></figure>
+<h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><ul>
+<li><p>开始创建<br><code>vue create &#39;项目名称&#39;</code><br><code>default</code>是使用默认配置(在这里我们选择Vue 2版本)<br><code>Manually select features</code> 是自定义配置<br>这里选择自定义配置，然后回车下一步<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://zylucky.gitee.io/zyblog_files/images/vue-cli4.0/step01.png"
+                        alt="在这里插入图片描述"
+                 ></p>
+</li>
+<li><p>选择配置（自定义配置），上下箭头选择空格键确认<code>*</code>好代表选中，回车键下一步（此处根据自己项目需要可进行选择安装，也可后续自己安装）<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://zylucky.gitee.io/zyblog_files/images/vue-cli4.0/step02.png"
+                        alt="在这里插入图片描述"
+                 ><br>是否使用<code>history</code>模式来创建路由，这里选择否，后期可更改<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://zylucky.gitee.io/zyblog_files/images/vue-cli4.0/step03.png"
+                        alt="在这里插入图片描述"
+                 ><br>css预处理这里选择的第一项<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://zylucky.gitee.io/zyblog_files/images/vue-cli4.0/step04.png"
+                        alt="在这里插入图片描述"
+                 ><br>您希望Babel, ESLint 配置的存放位置，我们选择在专用的配置文件中</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In dedicated config files //在专用的配置文件中</span><br><span class="line">In package.json //在package.json</span><br></pre></td></tr></table></figure>
+<p> <img  
+                       lazyload
+                       alt="image"
+                       data-src="https://zylucky.gitee.io/zyblog_files/images/vue-cli4.0/step05.png"
+                        alt="在这里插入图片描述"
+                 ><br>Save this as a preset for future projects?(y/N) （是否保存配置 我们可以选择Y ，保存后下次构建项目的时候就可以直用这次的配置构建项目）<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://zylucky.gitee.io/zyblog_files/images/vue-cli4.0/step06.png"
+                        alt="在这里插入图片描述"
+                 ></p>
+</li>
+<li><p>项目创建好后</p>
+<pre><code> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x27;项目目录&#x27; //进入项目根目录</span><br><span class="line">npm run serve //运行项目</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://zylucky.gitee.io/zyblog_files/images/vue-cli4.0/step07.png"
+                        alt="在这里插入图片描述"
+                 ></p>
+</li>
+<li><p>然后在浏览器输入<code>http://localhost:8080</code>,就可以看到运行界面了</p>
+<h3 id="项目修改"><a href="#项目修改" class="headerlink" title="项目修改"></a>项目修改</h3><h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4></li>
+<li><p>根目录创建环境配置文件以及<code>vue.config.js</code>配置文件<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://zylucky.gitee.io/zyblog_files/images/vue-cli4.0/step08.png"
+                        alt="在这里插入图片描述"
+                 ></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue-cli-service build --mode production    <span class="comment">//--mode后面跟的是创建的配置文件的名字</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>.env.development文件</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># just a flag 开发环境（默认）</span><br><span class="line">ENV = <span class="string">&#x27;development&#x27;</span></span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = <span class="string">&#x27;/dev-api&#x27;</span></span><br></pre></td></tr></table></figure>
+<p> .env.production文件</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># just a flag 线上环境（打包）</span><br><span class="line">ENV = <span class="string">&#x27;production&#x27;</span></span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = <span class="string">&#x27;/prod-api&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>vue.config.js文件,改配置文件中的代理配置是为后面本地测试接口时使用，不然会跨域<br> 配置详情可参考<a class="link"   target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/config/" >vue-cli<i class="fas fa-external-link-alt"></i></a></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vue.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">publicPath</span>: <span class="string">&#x27;/&#x27;</span>, <span class="comment">//基本路径</span></span><br><span class="line">    <span class="attr">outputDir</span>: <span class="string">&#x27;dist&#x27;</span>, <span class="comment">//构建时的输出目录</span></span><br><span class="line">    <span class="attr">assetsDir</span>: <span class="string">&#x27;static&#x27;</span>, <span class="comment">//放置静态资源的目录</span></span><br><span class="line">    <span class="attr">indexPath</span>: <span class="string">&#x27;index.html&#x27;</span>, <span class="comment">//html的输出路径</span></span><br><span class="line">    <span class="attr">productionSourceMap</span>: <span class="literal">false</span>, <span class="comment">// 生产环境是否生成 sourceMap 文件</span></span><br><span class="line">    <span class="attr">devServer</span>: &#123;</span><br><span class="line">        <span class="attr">open</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">proxy</span>: &#123;</span><br><span class="line">            <span class="string">&#x27;/dev-api&#x27;</span>: &#123;</span><br><span class="line">                <span class="attr">target</span>: <span class="string">&#x27;http://api.yckindergarten.com.cn&#x27;</span>,<span class="comment">//设置你调用的接口域名和端口号 别忘了加http</span></span><br><span class="line">                <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">pathRewrite</span>:&#123;</span><br><span class="line">                    <span class="string">&#x27;^/dev-api&#x27;</span>:<span class="string">&#x27;&#x27;</span><span class="comment">//这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 </span></span><br><span class="line">                              <span class="comment">//比如我要调用&#x27;http://40.00.100.133:3002/user/login&#x27;，直接写‘/api/user/login’即可</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// &#x27;/foo&#x27;: &#123;</span></span><br><span class="line">            <span class="comment">//     target: &#x27;&lt;other_url&gt;&#x27;</span></span><br><span class="line">            <span class="comment">// &#125;</span></span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="axios封装配置"><a href="#axios封装配置" class="headerlink" title="axios封装配置"></a>axios封装配置</h4></li>
+<li><p>安装<code>axios</code>、<code>element-ui</code>输入命令 <code>npm install --save element-ui</code><br>引入项目打开 <code>main.js</code> 文件</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">&#x27;element-ui&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;element-ui/lib/theme-chalk/index.css&#x27;</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">Vue.use(ElementUI)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(process.env.VUE_APP_BASE_API)<span class="comment">//测试可查看输出当前环境</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,<span class="comment">//路由</span></span><br><span class="line">  store,<span class="comment">//状态管理</span></span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>安装 <code>axios</code>、<code>qs</code> 命令行输入命令 <code>npm install --save axios qs</code></p>
+</li>
+<li><p>在src文件夹下新建http目录，并在http目录下创建三个文件</p>
+<p>  config.js独立的数据请求配置文件</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接口配置文件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="comment">//请求方式</span></span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">    <span class="comment">// 基础url前缀</span></span><br><span class="line">    <span class="attr">baseURL</span>: process.env.VUE_APP_BASE_API,<span class="comment">//取环境文件中定义的地址</span></span><br><span class="line">    <span class="comment">// 请求头信息</span></span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json;charset=UTF-8&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Appid&#x27;</span>: <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Token&#x27;</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 参数</span></span><br><span class="line">    <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">    <span class="comment">// 设置超时时间</span></span><br><span class="line">    <span class="attr">timeout</span>: <span class="number">10000</span>,</span><br><span class="line">    <span class="comment">// 携带凭证</span></span><br><span class="line">    <span class="attr">withCredentials</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="comment">// 返回数据类型</span></span><br><span class="line">    <span class="attr">responseType</span>: <span class="string">&#x27;json&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  instance.js请求axios封装、拦截、处理文件</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// axios 封装、拦截、统一请求处理</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span> <span class="comment">//安装后引入</span></span><br><span class="line"><span class="keyword">import</span> config <span class="keyword">from</span> <span class="string">&#x27;./config.js&#x27;</span> <span class="comment">//引入配置文件</span></span><br><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">&#x27;qs&#x27;</span> <span class="comment">//序列化数据请求</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">$axios</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> instance = axios.create(&#123;</span><br><span class="line">            <span class="attr">baseURL</span>: config.baseURL,</span><br><span class="line">            <span class="attr">headers</span>: &#123;&#125;,</span><br><span class="line">            <span class="attr">transformResponse</span>: [<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123; &#125;]</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// request 拦截器</span></span><br><span class="line">        instance.interceptors.request.use(</span><br><span class="line">            <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="comment">// Tip: 1</span></span><br><span class="line">                <span class="comment">// 请求开始的时候可以结合 vuex 开启全屏的 loading 动画</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// Tip: 2 </span></span><br><span class="line">                <span class="comment">// 带上 token , 可以结合 vuex 或者重 localStorage</span></span><br><span class="line">                <span class="comment">// if (store.getters.token) &#123;</span></span><br><span class="line">                <span class="comment">//     config.headers[&#x27;X-Token&#x27;] = getToken() // 让每个请求携带token--[&#x27;X-Token&#x27;]为自定义key 请根据实际情况自行修改</span></span><br><span class="line">                <span class="comment">// &#125; else &#123;</span></span><br><span class="line">                <span class="comment">//     // 重定向到登录页面    </span></span><br><span class="line">                <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// Tip: 3</span></span><br><span class="line">                <span class="comment">// 根据请求方法，序列化传来的参数，根据后端需求是否序列化</span></span><br><span class="line">                <span class="keyword">if</span> (config.method.toLocaleLowerCase() === <span class="string">&#x27;post&#x27;</span></span><br><span class="line">                    || config.method.toLocaleLowerCase() === <span class="string">&#x27;put&#x27;</span></span><br><span class="line">                    || config.method.toLocaleLowerCase() === <span class="string">&#x27;delete&#x27;</span>) &#123;</span><br><span class="line"></span><br><span class="line">                    config.data = qs.stringify(config.data)</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// console.log(config.data);</span></span><br><span class="line">                <span class="keyword">return</span> config</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="comment">// 请求错误时做些事(接口错误、超时等)</span></span><br><span class="line">                <span class="comment">// Tip: 4</span></span><br><span class="line">                <span class="comment">// 关闭loadding</span></span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">&#x27;request:&#x27;</span>, error)</span><br><span class="line"></span><br><span class="line">                <span class="comment">//  1.判断请求超时</span></span><br><span class="line">                <span class="keyword">if</span> (error.code === <span class="string">&#x27;ECONNABORTED&#x27;</span> &amp;&amp; error.message.indexOf(<span class="string">&#x27;timeout&#x27;</span>) !== -<span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">&#x27;根据你设置的timeout/真的请求超时 判断请求现在超时了，你可以在这里加入超时的处理方案&#x27;</span>)</span><br><span class="line">                    <span class="comment">// return service.request(originalRequest);//例如再重复请求一次</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//  2.需要重定向到错误页面</span></span><br><span class="line">                <span class="keyword">const</span> errorInfo = error.response</span><br><span class="line">                <span class="built_in">console</span>.log(errorInfo)</span><br><span class="line">                <span class="keyword">if</span> (errorInfo) &#123;</span><br><span class="line">                    <span class="comment">// error =errorInfo.data//页面那边catch的时候就能拿到详细的错误信息,看最下边的Promise.reject</span></span><br><span class="line">                    <span class="keyword">const</span> errorStatus = errorInfo.status; <span class="comment">// 404 403 500 ... 等</span></span><br><span class="line">                    <span class="comment">// router.push(&#123;</span></span><br><span class="line">                    <span class="comment">//     path: `/error/$&#123;errorStatus&#125;`</span></span><br><span class="line">                    <span class="comment">// &#125;)</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error) <span class="comment">// 在调用的那边可以拿到(catch)你想返回的错误信息</span></span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment">// response 拦截器</span></span><br><span class="line">        instance.interceptors.response.use(</span><br><span class="line">            <span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">let</span> data;</span><br><span class="line">                <span class="comment">// IE9时response.data是undefined，因此需要使用response.request.responseText(Stringify后的字符串)</span></span><br><span class="line">                <span class="keyword">if</span> (response.data == <span class="literal">undefined</span>) &#123;</span><br><span class="line">                    data = response.request.responseText</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    data = response.data</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// console.log(response);</span></span><br><span class="line">                <span class="comment">// 根据返回的code值来做不同的处理（和后端约定）</span></span><br><span class="line">                <span class="keyword">switch</span> (data.code) &#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">default</span>:</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 若不是正确的返回code，且已经登录，就抛出错误</span></span><br><span class="line">                <span class="comment">// const err = new Error(data.description)</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// err.data = data</span></span><br><span class="line">                <span class="comment">// err.response = response</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// throw err</span></span><br><span class="line">                <span class="keyword">return</span> data</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (err &amp;&amp; err.response) &#123;</span><br><span class="line">                    <span class="keyword">switch</span> (err.response.status) &#123;</span><br><span class="line">                        <span class="keyword">case</span> <span class="number">400</span>:</span><br><span class="line">                            err.message = <span class="string">&#x27;请求错误&#x27;</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">401</span>:</span><br><span class="line">                            err.message = <span class="string">&#x27;未授权，请登录&#x27;</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">403</span>:</span><br><span class="line">                            err.message = <span class="string">&#x27;拒绝访问&#x27;</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">404</span>:</span><br><span class="line">                            err.message = <span class="string">`请求地址出错: <span class="subst">$&#123;err.response.config.url&#125;</span>`</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">408</span>:</span><br><span class="line">                            err.message = <span class="string">&#x27;请求超时&#x27;</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">                            err.message = <span class="string">&#x27;服务器内部错误&#x27;</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">501</span>:</span><br><span class="line">                            err.message = <span class="string">&#x27;服务未实现&#x27;</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">502</span>:</span><br><span class="line">                            err.message = <span class="string">&#x27;网关错误&#x27;</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">503</span>:</span><br><span class="line">                            err.message = <span class="string">&#x27;服务不可用&#x27;</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">504</span>:</span><br><span class="line">                            err.message = <span class="string">&#x27;网关超时&#x27;</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">case</span> <span class="number">505</span>:</span><br><span class="line">                            err.message = <span class="string">&#x27;HTTP版本不受支持&#x27;</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                        <span class="attr">default</span>:</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">console</span>.error(err)</span><br><span class="line">                <span class="comment">// 此处我使用的是 element UI 的提示组件</span></span><br><span class="line">                <span class="comment">// Message.error(`ERROR: $&#123;err&#125;`);</span></span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(err) <span class="comment">// 返回接口返回的错误信息</span></span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">        <span class="comment">//请求处理</span></span><br><span class="line">        instance(options)</span><br><span class="line">            .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">                resolve(res)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            &#125;)</span><br><span class="line">            .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">                reject(error)</span><br><span class="line">            &#125;)</span><br><span class="line">        <span class="comment">// 处理结束</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  api.js接口公共管理文件</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// api接口统一管理</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;./instance&#x27;</span></span><br><span class="line"><span class="comment">// 将所有的接口统一起来便于维护</span></span><br><span class="line"><span class="comment">// 空气质量接口</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> airQuality = <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> axios(&#123;</span><br><span class="line">        <span class="attr">url</span>: <span class="string">&#x27;/util/getAirData&#x27;</span>,</span><br><span class="line">        <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">        data,</span><br><span class="line">        <span class="comment">// handle:true</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认全部导出</span></span><br><span class="line"><span class="comment">// export default &#123;</span></span><br><span class="line"><span class="comment">//     airQuality</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用，可以在main.js中直接导入，使用时，this.$api.airQuality()</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> api <span class="keyword">from</span> <span class="string">&#x27;./http/api.js&#x27;</span> <span class="comment">//引入接口文件</span></span><br><span class="line">Vue.prototype.$api = api; <span class="comment">//挂载</span></span><br></pre></td></tr></table></figure>
+<p> 调用</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.$api.airQuality(data).then(<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(res));</span><br><span class="line">&#125;).catch(<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p> 此方式使用时，项目运行是会一次性加载api文件中的所有接口</p>
+</li>
+<li><p>方式二，使用时引入</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">import</span> &#123; airQuality &#125; <span class="keyword">from</span> <span class="string">&quot;@/http/api.js&quot;</span>; <span class="comment">//引入使用的接口</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        </span></span></span><br><span class="line"><span class="javascript"><span class="xml">        &#125;;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="built_in">this</span>.airQuality(); <span class="comment">//调用接口</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="attr">methods</span>: &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="function"><span class="title">airQuality</span>(<span class="params"></span>)</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">            <span class="keyword">var</span> data = &#123;&#125;;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">            airQuality(data).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">                <span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(res));</span></span></span><br><span class="line"><span class="javascript"><span class="xml">            &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">&#125;;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">	</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>结束：至此项目成功配置完毕，执行启动命令，打包命令测试环境输出对应，运行成功，其中如有错误还望大家多多指出，谢谢！</p>
+</li>
+</ul>
+<p>github项目地址<a class="link"   target="_blank" rel="noopener" href="https://github.com/zylucky/vue-template" >github项目地址<i class="fas fa-external-link-alt"></i></a></p>
+<p>vue-cli2.0与vue3.0+创建出的项目具体有什么不一样，本篇中暂未详细说明</p>
+
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                vue-cli4.0搭建vue项目
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                c87a1b81.html
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">张渊</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2021-09-03 22:36</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">
+                        <i class="fa-brands fa-creative-commons"></i>
+                        <i class="fa-brands fa-creative-commons-by"></i>
+                        <i class="fa-brands fa-creative-commons-nc"></i>
+                        <i class="fa-brands fa-creative-commons-sa"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/b7954342.html"
+                                   title="node版本管理工具：nvm安装及使用"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">node版本管理工具：nvm安装及使用</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/d9a8bb34.html"
+                                   title="iview的Upload图片上传"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">iview的Upload图片上传</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7vue%E8%84%9A%E6%89%8B%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">升级vue脚手架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%BF%AE%E6%94%B9"><span class="nav-number">4.</span> <span class="nav-text">项目修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#axios%E5%B0%81%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">axios封装配置</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2023
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">张渊</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span> 提供部署服务
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">12.9k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7vue%E8%84%9A%E6%89%8B%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">升级vue脚手架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%BF%AE%E6%94%B9"><span class="nav-number">4.</span> <span class="nav-text">项目修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#axios%E5%B0%81%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">axios封装配置</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+            
+<script src="/js/post/copyright-info.js"></script>
+
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

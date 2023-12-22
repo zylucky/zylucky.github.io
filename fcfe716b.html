@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="张渊,张渊的博客,张渊的个人博客,执笔写下信念,技术学习小站,小手冰凉,zhangyuan,zyluck,zylucky,luck">
+    <meta name="description" content="张渊的个人博客，用于记录个人的学习笔记和日常问题总结">
+    <meta name="author" content="张渊">
+    
+    <title>
+        
+            vue spa应用seo优化方案（预渲染） |
+        
+        张渊的博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.zylucky.cn","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"张渊的博客","author":"张渊","avatar":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","logo":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg","favicon":"https://zylucky.gitee.io/zyblog_files/images/avatar.jpg"},"menu":{"Archives":"/archives"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"道阻且长，行则将至，行而不辍，未来可期。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/zylucky","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":"zyluckying@163.com"}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":false,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":["One","Two","Three","Trainee","Engineer","Architect"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"waline","valine":{"appid":"8z4NUyqeb6aAjw3AoeRxSc5w-MdYXbMMI","appkey":"sdU0a13xiVAq49ur6QrD8pas","server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":"https://blog-waline-kj3uqqv1f-zyluckys-projects.vercel.app","reaction":true,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"jsdelivr"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null,"/js/custom/run-time.js"]},"root":"","version":"4.0.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               张渊的博客
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        vue spa应用seo优化方案（预渲染）
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://zylucky.gitee.io/zyblog_files/images/avatar.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">张渊</span>
+                                
+                                    <span class="author-badge">Two</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
+                <span class="pc">2020-09-12 20:26:24</span>
+                <span class="mobile">2020-09-12 20:26</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="pc" data-updated="Sun Sep 13 2020 10:30:20 GMT+0800">2020-09-13 10:30:20</span>
+            </span>
+        
+
+        
+
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.2k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>4 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <p>预渲染能与服务端渲染一样提高 SEO 优化，但前者比后者需要更少的配置，实现成本低。弱网环境下，预渲染能更快地呈现页面内容，减少页面可见时间。本篇文章主要介绍了本人实现预渲染的一个过程。<br><br /></p>
+<ul>
+<li><p>从 <code>meta</code> 标签中读取 <code>keywords</code> 、 <code>description</code> 的内容。</p>
+</li>
+<li><p>根据语义化的 <code>html</code> 的标签爬取和分析内容。一个整体都是用 <code>div</code> 标签的网站和正确使用了 <code>html5</code> 标签的效果是不一样的。</p>
+</li>
+<li><p>读取 <code>a</code> 标签里的链接，通过 <code>a</code> 标签的链接可以跳转到别的网站。（爬虫是先跳转，还是继续爬内容再跳转，就看算法是广度优先还是深度优先了）</p>
+</li>
+<li><p>像 <code>h1 - h6</code> 标签是具有不同程度的强调意义的。 一般将 <code>h1</code> 视为重要内容。同样有强调内容还有 <code>strong</code> 、 <code>em</code> 标签。</p>
+<h4 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h4><p><code>vue v2.0</code> + <code>vue-router</code>  + <code>webpack</code> + <code>prerender-spa-plugin</code> + <code>vue-meta-info</code> + <code>vue-cli v2</code> </p>
+<h4 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h4><p>-使用 <code>npm</code> 或 <code>yarn</code> 安装 <code>prerender-spa-plugin</code> 和 <code>vue-meta-info</code> 的过程就不描述了。 </p>
+<p>-在webpack中配置 <code>prerender-spa-plugin</code> </p>
+<p>-配置先弄懂要配置在哪个文件里，配置是否生效。 <code>vue-cli2</code> 的配置文件很多，对这些文件不了解的话，很容易配置错地方。 </p>
+<p>-这个配置只需要在 <code>build</code> 的时候可以生成预渲染好的html，所以应该配置在 <code>build/webpack.prod.conf.js</code> 这个文件里。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在build/webpack.prod.conf.js添加引入</span></span><br><span class="line"><span class="keyword">const</span> PrerenderSpaPlugin = <span class="built_in">require</span>(<span class="string">&#x27;prerender-spa-plugin&#x27;</span>)<span class="comment">//解决seo</span></span><br><span class="line"><span class="keyword">const</span> Renderer = PrerenderSpaPlugin.PuppeteerRenderer<span class="comment">//解决seo</span></span><br><span class="line"><span class="keyword">const</span> webpackConfig = merge(baseWebpackConfig, &#123;</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="comment">// vue-cli生成的配置中就已有这个了，不要动</span></span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            <span class="attr">filename</span>: config.build.index,</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;index.html&#x27;</span>,</span><br><span class="line">            <span class="attr">inject</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">minify</span>: &#123;</span><br><span class="line">                <span class="attr">removeComments</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">collapseWhitespace</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">removeAttributeQuotes</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">chunksSortMode</span>: <span class="string">&#x27;dependency&#x27;</span></span><br><span class="line">        &#125;),</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 在vue-cli生成的文件的基础上，只有下面这个才是我们要配置的</span></span><br><span class="line">        <span class="keyword">new</span> PrerenderSPAPlugin(&#123;</span><br><span class="line">            <span class="comment">// 生成文件的路径，也可以与webpakc打包的一致。</span></span><br><span class="line">            <span class="comment">// 下面这句话非常重要！！！</span></span><br><span class="line">            <span class="comment">// 这个目录只能有一级，如果目录层次大于一级，在生成的时候不会有任何错误提示，在预渲染的时候只会卡着不动。</span></span><br><span class="line">            <span class="attr">staticDir</span>: path.join(__dirname, <span class="string">&#x27;../dist&#x27;</span>),</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 对应自己的路由文件，比如index有参数，就需要写成 /index/param1。</span></span><br><span class="line">            <span class="attr">routes</span>: [<span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;/index&#x27;</span>, <span class="string">&#x27;/about&#x27;</span>, <span class="string">&#x27;/alPay&#x27;</span>, <span class="string">&#x27;/wxPay&#x27;</span>],</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 这个很重要，如果没有配置这段，也不会进行预编译</span></span><br><span class="line">            <span class="attr">renderer</span>: <span class="keyword">new</span> Renderer(&#123;</span><br><span class="line">                <span class="attr">inject</span>: &#123;</span><br><span class="line">                  <span class="attr">foo</span>: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">headless</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="comment">// 在 main.js 中 document.dispatchEvent(new Event(&#x27;render-event&#x27;))，两者的事件名称要对应上。</span></span><br><span class="line">                <span class="attr">renderAfterDocumentEvent</span>: <span class="string">&#x27;render-event&#x27;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//然后在main.js中添加引入</span></span><br><span class="line"><span class="keyword">import</span> MetaInfo <span class="keyword">from</span> <span class="string">&#x27;vue-meta-info&#x27;</span></span><br><span class="line">Vue.use(MetaInfo)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">    router,</span><br><span class="line">    store,</span><br><span class="line">    <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App),</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 这句非常重要，否则预渲染将不会启动 */</span></span><br><span class="line">    mounted () &#123;</span><br><span class="line">        <span class="built_in">document</span>.dispatchEvent(<span class="keyword">new</span> Event(<span class="string">&#x27;render-event&#x27;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>然后运行一下 <code>npm run build</code> 。看一下生成的 <code>dist</code> 的目录里是不是有每个路由名称对应的文件夹。然后找个 <em>目录里</em> 的 <code>index.html</code> 用IDE打开，看文件内容里是否有该文件应该有的内容。有的话，这步就成功了 </p>
+<h4 id="在vue中使用-vue-meta-info"><a href="#在vue中使用-vue-meta-info" class="headerlink" title="在vue中使用 vue-meta-info"></a>在vue中使用 <code>vue-meta-info</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">		首页</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">    metaInfo: &#123;</span><br><span class="line">        title: &#x27;我是一个title&#x27;,</span><br><span class="line">        meta: [</span><br><span class="line">            &#123;</span><br><span class="line">                name: &#x27;keywords&#x27;,</span><br><span class="line">                content: &#x27;关键字1,关键字2,关键字3&#x27;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                name: &#x27;description&#x27;,</span><br><span class="line">                content: &#x27;这是一段网页的描述&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="下面是特别需要注意的事项（否则将会出现问题）"><a href="#下面是特别需要注意的事项（否则将会出现问题）" class="headerlink" title="下面是特别需要注意的事项（否则将会出现问题）"></a>下面是特别需要注意的事项（否则将会出现问题）</h4><ul>
+<li><p>这里使用的 <code>prerender-spa-plugin</code> 的版本是 <code>3.2.1</code> ，在 <code>2.x</code> 的版本中有个写法如下 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> PrerenderSpaPlugin = <span class="built_in">require</span>(<span class="string">&#x27;prerender-spa-plugin&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> webpackConfig = merge(baseWebpackConfig, &#123;</span><br><span class="line">    <span class="attr">plugins</span>: &#123;</span><br><span class="line">        <span class="comment">//配置 prerender-spa-plugin</span></span><br><span class="line">        <span class="keyword">new</span> PrerenderSpaPlugin(</span><br><span class="line">            <span class="comment">// 生成文件的路径，此处与webpack打包地址一致</span></span><br><span class="line">            path.join(config.build.assetsRoot), <span class="comment">//config.build.assetsRoot为vue cli生成的配置，打包后的文件地址</span></span><br><span class="line">            <span class="comment">// 配置要做预渲染的路由，只支持h5 history方式</span></span><br><span class="line">            [ <span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;/test&#x27;</span>]</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>以上 <code>2.x</code> 的写法，在 <code>3.x</code> 的版本会提示一个警告，让你采用对象的形式 </p>
+</li>
+<li><p>route 的 <code>history</code> 模式就是如下代码中配置 </p>
+<p>预渲染方式下的 route 采用 <code>history</code> 模式，经过试验 得采用history模式，否则每个index.html文件的内容都会是一样的。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;history&#x27;</span>,</span><br><span class="line">    <span class="attr">routes</span>: [</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><b>注意事项1:</b><code>history</code> 模式下的route，将不会以 <code>hash</code> 的形式展示，也就是说，URL里没有 <code>#</code> 了。</p>
+<p><b>注意事项2:</b>但是需要注意<code>history</code>这种模式会出现页面刷新后出现404页面问题。<a class="link"   target="_blank" rel="noopener" href="https://router.vuejs.org/zh/guide/essentials/history-mode.html" >vue.js官方教程里提到的解决办法可以参考<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                vue spa应用seo优化方案（预渲染）
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                fcfe716b.html
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">张渊</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2020-09-12 20:26</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">
+                        <i class="fa-brands fa-creative-commons"></i>
+                        <i class="fa-brands fa-creative-commons-by"></i>
+                        <i class="fa-brands fa-creative-commons-nc"></i>
+                        <i class="fa-brands fa-creative-commons-sa"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/d9a8bb34.html"
+                                   title="iview的Upload图片上传"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">iview的Upload图片上传</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/4a17b156.html"
+                                   title="Hello World"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Hello World</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">技术栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">具体步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8vue%E4%B8%AD%E4%BD%BF%E7%94%A8-vue-meta-info"><span class="nav-number">3.</span> <span class="nav-text">在vue中使用 vue-meta-info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E9%9D%A2%E6%98%AF%E7%89%B9%E5%88%AB%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E4%BA%8B%E9%A1%B9%EF%BC%88%E5%90%A6%E5%88%99%E5%B0%86%E4%BC%9A%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">下面是特别需要注意的事项（否则将会出现问题）</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2023
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">张渊</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span> 提供部署服务
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">12.9k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">技术栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">具体步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8vue%E4%B8%AD%E4%BD%BF%E7%94%A8-vue-meta-info"><span class="nav-number">3.</span> <span class="nav-text">在vue中使用 vue-meta-info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E9%9D%A2%E6%98%AF%E7%89%B9%E5%88%AB%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E4%BA%8B%E9%A1%B9%EF%BC%88%E5%90%A6%E5%88%99%E5%B0%86%E4%BC%9A%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">下面是特别需要注意的事项（否则将会出现问题）</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+            
+<script src="/js/post/copyright-info.js"></script>
+
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>
